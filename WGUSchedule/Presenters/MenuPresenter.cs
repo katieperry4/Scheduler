@@ -40,11 +40,12 @@ namespace WGUSchedule.Presenters
                 _menuForm.Hide();
             } else if (menuSelection == "calendar")
             {
-
             } else if (menuSelection == "appointments")
             {
-
-            } else
+                Program.showAppointments(_userId, _culture, _connectionString);
+                _menuForm.Hide();
+            }
+            else
             {
                 //reports
 

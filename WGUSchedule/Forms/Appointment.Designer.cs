@@ -160,6 +160,7 @@
             this.CancelButton.TabIndex = 21;
             this.CancelButton.Text = "Cancel";
             this.CancelButton.UseVisualStyleBackColor = true;
+            this.CancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
             // SaveButton
             // 
@@ -190,6 +191,8 @@
             this.Controls.Add(this.AddRadio);
             this.Name = "Appointment";
             this.Text = "Appointment";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Appointment_FormClosing);
+            this.Load += new System.EventHandler(this.Appointment_Load);
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
