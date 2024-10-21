@@ -23,6 +23,13 @@ namespace WGUSchedule.Forms
 
         private void Customer_Load(object sender, EventArgs e)
         {
+
+            refreshDropdown();
+        }
+
+        public void refreshDropdown()
+        {
+            CustomerDropdown.Items.Clear();
             List<Models.Customer> customerNamesRaw = _customerPresenter.getCustomerNames();
             _customerNamesRaw = customerNamesRaw;
 
@@ -30,7 +37,6 @@ namespace WGUSchedule.Forms
             {
                 CustomerDropdown.Items.Add(customer.customerName);
             }
-
         }
 
         public void setPresenter(CustomerPresenter customerPresenter)
@@ -91,7 +97,16 @@ namespace WGUSchedule.Forms
             {
                 if (CountryBox.Text != "" && ZipBox.Text != "" && CityBox.Text != "" && AddressBox.Text != "" && PhoneBox.Text != "" && NameBox.Text != "")
                 {
-                    _customerPresenter.addCustomer(customerName, customerPhone, customerAddress, customerCity, customerZip, customerCountry);
+                    bool addStatus = _customerPresenter.addCustomer(customerName, customerPhone, customerAddress, customerCity, customerZip, customerCountry);
+                    if (addStatus)
+                    {
+                        MessageBox.Show($"{customerName} added successfully.");
+                        cleanupBoxes();
+                        refreshDropdown();
+                    } else
+                    {
+                        MessageBox.Show($"There was an error adding {customerName}");
+                    }
                 }
                 else
                 {
@@ -101,9 +116,23 @@ namespace WGUSchedule.Forms
             else if (EditRadio.Checked)
             {
                 int selectedCustomerId = selectedCustomer.customerId;
+                int selectedCustomerAddressId = selectedCustomer.addressId;
                 if (CountryBox.Text != "" && ZipBox.Text != "" && CityBox.Text != "" && AddressBox.Text != "" && PhoneBox.Text != "" && NameBox.Text != "")
                 {
-                    _customerPresenter.editCustomer(selectedCustomerId, customerName, customerPhone, customerAddress, customerCity, customerZip, customerCountry);
+                    try
+                    {
+
+
+                        _customerPresenter.editCustomer(selectedCustomerId, customerName, customerPhone, customerAddress, customerCity, customerZip, customerCountry, selectedCustomerAddressId);
+                        cleanupBoxes();
+                        refreshDropdown();
+                        MessageBox.Show("Customer successfully edited!");
+                        
+                    }
+                    catch (Exception ex) 
+                    {
+                        MessageBox.Show($"There was an error editing {customerName}: {ex}");
+                    }
                 }
                 else
                 {
@@ -123,6 +152,7 @@ namespace WGUSchedule.Forms
                         {
                             CustomerDropdown.Items.Remove(CustomerDropdown.SelectedItem);
                             cleanupBoxes();
+                            refreshDropdown();
                         }
                         else
                         {
