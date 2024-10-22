@@ -23,7 +23,6 @@ namespace WGUSchedule.Forms
 
         private void Customer_Load(object sender, EventArgs e)
         {
-
             refreshDropdown();
         }
 

@@ -38,9 +38,10 @@
             this.TypeLabel = new System.Windows.Forms.Label();
             this.TypeDropdown = new System.Windows.Forms.ComboBox();
             this.StartTimeLabel = new System.Windows.Forms.Label();
-            this.StartTimeDropdown = new System.Windows.Forms.ComboBox();
             this.CancelButton = new System.Windows.Forms.Button();
             this.SaveButton = new System.Windows.Forms.Button();
+            this.DatePicker = new System.Windows.Forms.DateTimePicker();
+            this.TimePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             this.DeleteRadio.TabStop = true;
             this.DeleteRadio.Text = "Delete Appointment";
             this.DeleteRadio.UseVisualStyleBackColor = true;
+            this.DeleteRadio.CheckedChanged += new System.EventHandler(this.DeleteRadio_CheckedChanged);
             // 
             // EditRadio
             // 
@@ -74,6 +76,7 @@
             this.EditRadio.TabStop = true;
             this.EditRadio.Text = "Edit Appointment";
             this.EditRadio.UseVisualStyleBackColor = true;
+            this.EditRadio.CheckedChanged += new System.EventHandler(this.EditRadio_CheckedChanged);
             // 
             // AddRadio
             // 
@@ -85,6 +88,7 @@
             this.AddRadio.TabStop = true;
             this.AddRadio.Text = "Add Appointment";
             this.AddRadio.UseVisualStyleBackColor = true;
+            this.AddRadio.CheckedChanged += new System.EventHandler(this.AddRadio_CheckedChanged);
             // 
             // CustomerLabel
             // 
@@ -102,11 +106,13 @@
             this.CustomerDropdown.Name = "CustomerDropdown";
             this.CustomerDropdown.Size = new System.Drawing.Size(212, 28);
             this.CustomerDropdown.TabIndex = 8;
+            this.CustomerDropdown.SelectionChangeCommitted += new System.EventHandler(this.CustomerDropdown_SelectionChangeCommitted);
             // 
             // AppointmentGrid
             // 
             this.AppointmentGrid.AllowUserToAddRows = false;
             this.AppointmentGrid.AllowUserToDeleteRows = false;
+            this.AppointmentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.AppointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.AppointmentGrid.Location = new System.Drawing.Point(196, 172);
             this.AppointmentGrid.MultiSelect = false;
@@ -117,6 +123,7 @@
             this.AppointmentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.AppointmentGrid.Size = new System.Drawing.Size(807, 150);
             this.AppointmentGrid.TabIndex = 12;
+            this.AppointmentGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.AppointmentGrid_CellMouseClick);
             // 
             // TypeLabel
             // 
@@ -138,19 +145,11 @@
             // StartTimeLabel
             // 
             this.StartTimeLabel.AutoSize = true;
-            this.StartTimeLabel.Location = new System.Drawing.Point(443, 425);
+            this.StartTimeLabel.Location = new System.Drawing.Point(336, 423);
             this.StartTimeLabel.Name = "StartTimeLabel";
             this.StartTimeLabel.Size = new System.Drawing.Size(86, 20);
             this.StartTimeLabel.TabIndex = 15;
             this.StartTimeLabel.Text = "Start Time:";
-            // 
-            // StartTimeDropdown
-            // 
-            this.StartTimeDropdown.FormattingEnabled = true;
-            this.StartTimeDropdown.Location = new System.Drawing.Point(540, 417);
-            this.StartTimeDropdown.Name = "StartTimeDropdown";
-            this.StartTimeDropdown.Size = new System.Drawing.Size(212, 28);
-            this.StartTimeDropdown.TabIndex = 16;
             // 
             // CancelButton
             // 
@@ -170,15 +169,32 @@
             this.SaveButton.TabIndex = 20;
             this.SaveButton.Text = "Save";
             this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // DatePicker
+            // 
+            this.DatePicker.Location = new System.Drawing.Point(428, 423);
+            this.DatePicker.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.DatePicker.Name = "DatePicker";
+            this.DatePicker.Size = new System.Drawing.Size(341, 26);
+            this.DatePicker.TabIndex = 22;
+            // 
+            // TimePicker
+            // 
+            this.TimePicker.Location = new System.Drawing.Point(794, 422);
+            this.TimePicker.Name = "TimePicker";
+            this.TimePicker.Size = new System.Drawing.Size(200, 26);
+            this.TimePicker.TabIndex = 23;
             // 
             // Appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 580);
+            this.Controls.Add(this.TimePicker);
+            this.Controls.Add(this.DatePicker);
             this.Controls.Add(this.CancelButton);
             this.Controls.Add(this.SaveButton);
-            this.Controls.Add(this.StartTimeDropdown);
             this.Controls.Add(this.StartTimeLabel);
             this.Controls.Add(this.TypeDropdown);
             this.Controls.Add(this.TypeLabel);
@@ -211,8 +227,9 @@
         private System.Windows.Forms.Label TypeLabel;
         private System.Windows.Forms.ComboBox TypeDropdown;
         private System.Windows.Forms.Label StartTimeLabel;
-        private System.Windows.Forms.ComboBox StartTimeDropdown;
         private System.Windows.Forms.Button CancelButton;
         private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.DateTimePicker DatePicker;
+        private System.Windows.Forms.DateTimePicker TimePicker;
     }
 }

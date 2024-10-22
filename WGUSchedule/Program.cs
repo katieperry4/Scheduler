@@ -24,6 +24,7 @@ namespace WGUSchedule
             Application.SetCompatibleTextRenderingDefault(false);
 
             string connectionString = "Server=localhost;Database=schedule;Uid=root;Pwd=1x!Tacobell";
+            //string connectionString = "server=127.0.0.1;user=sqlUser;database=client_schedule;port=3306;password=Passw0rd!;"
 
             Login loginForm = new Login();
             LoginPresenter loginPresenter  = new LoginPresenter(loginForm, connectionString, currentCulture);
