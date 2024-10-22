@@ -100,8 +100,9 @@
             this.ExitButton.Name = "ExitButton";
             this.ExitButton.Size = new System.Drawing.Size(115, 42);
             this.ExitButton.TabIndex = 13;
-            this.ExitButton.Text = "Exit";
+            this.ExitButton.Text = "Back";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // Calendar
             // 
@@ -116,6 +117,7 @@
             this.Controls.Add(this.AllRadio);
             this.Name = "Calendar";
             this.Text = "Calendar";
+            this.Load += new System.EventHandler(this.Calendar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CalendarGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

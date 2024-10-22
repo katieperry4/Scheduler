@@ -34,13 +34,18 @@ namespace WGUSchedule.Presenters
             if (menuSelection == null)
             {
                 return;
-            } else if (menuSelection == "customer")
+            }
+            else if (menuSelection == "customer")
             {
                 Program.showCustomer(_userId, _culture, _connectionString);
                 _menuForm.Hide();
-            } else if (menuSelection == "calendar")
+            }
+            else if (menuSelection == "calendar")
             {
-            } else if (menuSelection == "appointments")
+                Program.showCalendar(_userId, _culture, _connectionString);
+                _menuForm.Hide();
+            }
+            else if (menuSelection == "appointments")
             {
                 Program.showAppointments(_userId, _culture, _connectionString);
                 _menuForm.Hide();

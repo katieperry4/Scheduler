@@ -53,5 +53,12 @@ namespace WGUSchedule
             AppointmentPresenter appointmentPresenter = new AppointmentPresenter(appointmentForm, connectionString, currentCulture, userId);
             appointmentForm.Show();
         }
+
+        public static void showCalendar(int userId, CultureInfo currentCulture, string connectionString)
+        {
+            Forms.Calendar calendarForm = new Forms.Calendar();
+            CalendarPresenter calendarPresenter = new CalendarPresenter(calendarForm, connectionString, currentCulture, userId);
+            calendarForm.Show();
+        }
     }
 }
