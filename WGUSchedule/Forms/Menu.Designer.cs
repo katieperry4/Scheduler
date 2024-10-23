@@ -128,7 +128,9 @@
             this.Controls.Add(this.AppointmentsButton);
             this.Controls.Add(this.CustomersButton);
             this.Controls.Add(this.MenuHeader);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Menu_FormClosing);
             this.Load += new System.EventHandler(this.Menu_Load);

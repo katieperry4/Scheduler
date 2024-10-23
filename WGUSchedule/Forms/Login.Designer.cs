@@ -98,7 +98,9 @@
             this.Controls.Add(this.UsernameBox);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.LoginHeader);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Login";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
             this.Load += new System.EventHandler(this.Login_Load);
             this.ResumeLayout(false);

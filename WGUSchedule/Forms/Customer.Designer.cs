@@ -256,7 +256,9 @@
             this.Controls.Add(this.DeleteRadio);
             this.Controls.Add(this.EditRadio);
             this.Controls.Add(this.AddRadio);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Customer";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Customer";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Customer_FormClosing);
             this.Load += new System.EventHandler(this.Customer_Load);

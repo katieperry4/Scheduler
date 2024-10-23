@@ -229,7 +229,9 @@
             this.Controls.Add(this.TypeLabel);
             this.Controls.Add(this.UserDropdown);
             this.Controls.Add(this.AppointmentGrid);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Reports";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reports_FormClosing);
             this.Load += new System.EventHandler(this.Reports_Load);

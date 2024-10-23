@@ -114,14 +114,14 @@
             this.AppointmentGrid.AllowUserToDeleteRows = false;
             this.AppointmentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.AppointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AppointmentGrid.Location = new System.Drawing.Point(196, 172);
+            this.AppointmentGrid.Location = new System.Drawing.Point(196, 160);
             this.AppointmentGrid.MultiSelect = false;
             this.AppointmentGrid.Name = "AppointmentGrid";
             this.AppointmentGrid.ReadOnly = true;
             this.AppointmentGrid.RowHeadersWidth = 62;
             this.AppointmentGrid.RowTemplate.Height = 28;
             this.AppointmentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AppointmentGrid.Size = new System.Drawing.Size(807, 150);
+            this.AppointmentGrid.Size = new System.Drawing.Size(807, 183);
             this.AppointmentGrid.TabIndex = 12;
             this.AppointmentGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.AppointmentGrid_CellMouseClick);
             // 
@@ -190,7 +190,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 580);
+            this.ClientSize = new System.Drawing.Size(1178, 547);
             this.Controls.Add(this.TimePicker);
             this.Controls.Add(this.DatePicker);
             this.Controls.Add(this.CancelButton);
@@ -205,7 +205,9 @@
             this.Controls.Add(this.DeleteRadio);
             this.Controls.Add(this.EditRadio);
             this.Controls.Add(this.AddRadio);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Appointment";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Appointment_FormClosing);
             this.Load += new System.EventHandler(this.Appointment_Load);

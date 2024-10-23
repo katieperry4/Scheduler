@@ -135,9 +135,11 @@ namespace WGUSchedule.Forms
             {
                 cleanupBoxes();
                 AppointmentGrid.Enabled = false;
+             
             } else
             {
                 AppointmentGrid.Enabled = true;
+              
             }
         }
 
@@ -158,7 +160,7 @@ namespace WGUSchedule.Forms
         private void SaveButton_Click(object sender, EventArgs e)
         {
             bool validInput = checkBoxes();
-            if(!validInput) { return; }
+            if(validInput == false) { return; }
             int rowIndex = AppointmentGrid.CurrentCell?.RowIndex ?? -1;
             int appointmentId = rowIndex >= 0 ?(int?)AppointmentGrid.Rows[rowIndex].Cells["appointmentId"]?.Value ?? 0 : 0;
             Models.Appointment selectedAppointment = _appointments.FirstOrDefault(a => a.appointmentId == appointmentId);
@@ -235,7 +237,7 @@ namespace WGUSchedule.Forms
 
         private bool checkBoxes()
         {
-            if ((CustomerDropdown.SelectedValue != null && CustomerDropdown.SelectedValue != "") && (TypeDropdown.SelectedValue != null && TypeDropdown.SelectedValue != ""))
+            if (CustomerDropdown.SelectedItem != null && TypeDropdown.SelectedItem != null)
             {
                 return true;
             }

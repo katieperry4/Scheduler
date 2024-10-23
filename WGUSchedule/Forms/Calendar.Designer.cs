@@ -119,7 +119,9 @@
             this.Controls.Add(this.MonthRadio);
             this.Controls.Add(this.WeekRadio);
             this.Controls.Add(this.AllRadio);
+            this.MinimumSize = new System.Drawing.Size(1000, 0);
             this.Name = "Calendar";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Calendar";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Calendar_FormClosed);
             this.Load += new System.EventHandler(this.Calendar_Load);
