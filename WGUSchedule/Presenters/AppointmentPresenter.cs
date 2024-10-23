@@ -240,7 +240,7 @@ namespace WGUSchedule.Presenters
         {
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                string query = @"INSERT INTO appointment (customerId, userId, start, end, type) VALUES (@customerId, @userId, @start, @end, @type)";
+                string query = @"INSERT INTO appointment (customerId, userId, start, end, type, title, description, location, contact, createdBy, lastUpdateBy, url, createDate, lastUpdate) VALUES (@customerId, @userId, @start, @end, @type, 'not needed', 'not needed', 'not needed', 'not needed', 'not needed', 'not needed', 'not needed', NOW(), NOW())";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {

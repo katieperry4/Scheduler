@@ -207,7 +207,7 @@ namespace WGUSchedule.Presenters
                     else
                     {
                         reader.Close();
-                        string insertQuery = "INSERT INTO country (country) VALUES (@newCountryName)";
+                        string insertQuery = "INSERT INTO country (country, createdBy, lastUpdateBy, createDate, lastUpdate) VALUES (@newCountryName, 'test', 'test', NOW(), NOW())";
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
                             insertCmd.Parameters.AddWithValue("newCountryName", countryName);
@@ -239,7 +239,7 @@ namespace WGUSchedule.Presenters
                     else
                     {
                         reader.Close();
-                        string insertQuery = "INSERT INTO city (city, countryId) VALUES (@newCityName, @countryId)";
+                        string insertQuery = "INSERT INTO city (city, countryId, createdBy, lastUpdateBy, createDate, lastUpdate) VALUES (@newCityName, @countryId, 'test', 'test', NOW(), NOW())";
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
                             insertCmd.Parameters.AddWithValue("newCityName", cityName);
@@ -271,7 +271,7 @@ namespace WGUSchedule.Presenters
                     else
                     {
                         reader.Close();
-                        string insertQuery = "INSERT INTO address (address, cityId, postalCode, phone) VALUES (@address, @cityId, @postalCode, @phone)";
+                        string insertQuery = "INSERT INTO address (address, cityId, postalCode, phone, address2, createdBy, lastUpdateBy, createDate, lastUpdate) VALUES (@address, @cityId, @postalCode, @phone, 'not needed', 'test', 'test', NOW(), NOW())";
                         using (MySqlCommand insertCmd = new MySqlCommand(insertQuery, connection))
                         {
                             insertCmd.Parameters.AddWithValue("address", customerAddress);
@@ -299,7 +299,7 @@ namespace WGUSchedule.Presenters
             {
                 using (MySqlConnection connection = new MySqlConnection(_connectionString))
                 {
-                    string query = "INSERT INTO customer (customerName, addressId) VALUES (@customerName, @addressId)";
+                    string query = "INSERT INTO customer (customerName, addressId, active, createdBy, lastUpdateBy, createDate, lastUpdate) VALUES (@customerName, @addressId, 1, 'test', 'test', NOW(), NOW())";
                     connection.Open();
                     using (MySqlCommand cmd = new MySqlCommand(query, connection))
                     {
