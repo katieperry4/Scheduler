@@ -157,6 +157,8 @@ namespace WGUSchedule.Forms
 
         private void SaveButton_Click(object sender, EventArgs e)
         {
+            bool validInput = checkBoxes();
+            if(!validInput) { return; }
             int rowIndex = AppointmentGrid.CurrentCell?.RowIndex ?? -1;
             int appointmentId = rowIndex >= 0 ?(int?)AppointmentGrid.Rows[rowIndex].Cells["appointmentId"]?.Value ?? 0 : 0;
             Models.Appointment selectedAppointment = _appointments.FirstOrDefault(a => a.appointmentId == appointmentId);
@@ -182,7 +184,6 @@ namespace WGUSchedule.Forms
                 }
             }
             DateTime startTimeUTC = getDateFromForm();
-            //DateTime endTimeUTC = new DateTime(startTimeUTC.Year, startTimeUTC.Month, startTimeUTC.Day, startTimeUTC.Hour + 1, startTimeUTC.Minute, startTimeUTC.Second);
             DateTime endTimeUTC = startTimeUTC.AddHours(1);
             bool validTime = withinESTLimits(startTimeUTC);
             if (validTime == false) 
@@ -192,7 +193,7 @@ namespace WGUSchedule.Forms
             if (AddRadio.Checked)
             {
                 bool conflictingAppointments = _appointmentPresenter.checkConfliction(startTimeUTC, endTimeUTC, customerId, userId);
-
+                
                 if (appointmentType == "" || appointmentType == null)
                 {
                     MessageBox.Show("You must select an appointment type.");
@@ -229,6 +230,19 @@ namespace WGUSchedule.Forms
                 {
                     MessageBox.Show("There was an error editing this appointment");
                 }
+            }
+        }
+
+        private bool checkBoxes()
+        {
+            if ((CustomerDropdown.SelectedValue != null && CustomerDropdown.SelectedValue != "") && (TypeDropdown.SelectedValue != null && TypeDropdown.SelectedValue != ""))
+            {
+                return true;
+            }
+            else 
+            {
+                MessageBox.Show("All fields must be filled");
+                return false; 
             }
         }
 
