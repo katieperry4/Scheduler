@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,6 +104,23 @@ AND start >= UTC_TIMESTAMP()";
         public string getCulture()
         {
             return _culture.TwoLetterISOLanguageName;
+        }
+
+        internal async void logLogin(string userName, string password)
+        {
+            UTF8Encoding utfEncoding = new UTF8Encoding();
+            string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string logPath = Path.Combine(baseDirectory, "..", "..", "Logs");
+            string filePath = Path.Combine(logPath, "Login_History.txt");
+            string fullFilePath = Path.GetFullPath(filePath);
+
+            byte[] content = utfEncoding.GetBytes($"Login attempt with UN: {userName} and PW: {password} \n");
+            using(FileStream SourceStream  = File.Open(fullFilePath, FileMode.OpenOrCreate))
+            {
+                SourceStream.Seek(0, SeekOrigin.End);
+                await SourceStream.WriteAsync(content, 0, content.Length);
+            }
+
         }
     }
 }
