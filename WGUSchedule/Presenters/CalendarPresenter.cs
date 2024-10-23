@@ -1,9 +1,11 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WGUSchedule.Models;
 
 namespace WGUSchedule.Presenters
 {
@@ -30,9 +32,37 @@ namespace WGUSchedule.Presenters
             _calendarForm.Hide();
         }
 
-        //method to return all appointments
+        internal List<AppointmentExpanded> getAllAppointments(int userId)
+        {
+            List<AppointmentExpanded> appointments = new List<AppointmentExpanded>();
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                string query = @"SELECT * FROM appointment JOIN customer ON customer.customerId = appointment.customerId WHERE userId = @userId ORDER BY start";
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("userId", userId);
+                    MySqlDataReader reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        appointments.Add(new AppointmentExpanded
+                        {
+                            customerId = reader.GetInt32("customerId"),
+                            userId = reader.GetInt32("userId"),
+                            type = reader.GetString("type"),
+                            start = (DateTime)reader.GetDateTime("start").ToLocalTime(),
+                            appointmentId = reader.GetInt32("appointmentId"),
+                            customerName = reader.GetString("customerName")
+                        });
+
+                    }
+                }
+                return appointments;
+            }
+        }
+
         //method to return appointments between two dates -> able to handle week or month
-            //month is easy bc we can just search for ex october 2024
-            //week might take some math
+        //month is easy bc we can just search for ex october 2024
+        //week might take some math
     }
 }

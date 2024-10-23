@@ -56,6 +56,7 @@
             this.MonthRadio.TabStop = true;
             this.MonthRadio.Text = "Current Month";
             this.MonthRadio.UseVisualStyleBackColor = true;
+            this.MonthRadio.CheckedChanged += new System.EventHandler(this.MonthRadio_CheckedChanged);
             // 
             // WeekRadio
             // 
@@ -67,6 +68,7 @@
             this.WeekRadio.TabStop = true;
             this.WeekRadio.Text = "Current Week";
             this.WeekRadio.UseVisualStyleBackColor = true;
+            this.WeekRadio.CheckedChanged += new System.EventHandler(this.WeekRadio_CheckedChanged);
             // 
             // AllRadio
             // 
@@ -78,20 +80,22 @@
             this.AllRadio.TabStop = true;
             this.AllRadio.Text = "All Appointments";
             this.AllRadio.UseVisualStyleBackColor = true;
+            this.AllRadio.CheckedChanged += new System.EventHandler(this.AllRadio_CheckedChanged);
             // 
             // CalendarGrid
             // 
             this.CalendarGrid.AllowUserToAddRows = false;
             this.CalendarGrid.AllowUserToDeleteRows = false;
             this.CalendarGrid.AllowUserToResizeColumns = false;
+            this.CalendarGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.CalendarGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.CalendarGrid.Location = new System.Drawing.Point(191, 108);
+            this.CalendarGrid.Location = new System.Drawing.Point(156, 97);
             this.CalendarGrid.Name = "CalendarGrid";
             this.CalendarGrid.ReadOnly = true;
             this.CalendarGrid.RowHeadersWidth = 62;
             this.CalendarGrid.RowTemplate.Height = 28;
             this.CalendarGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.CalendarGrid.Size = new System.Drawing.Size(721, 226);
+            this.CalendarGrid.Size = new System.Drawing.Size(794, 226);
             this.CalendarGrid.TabIndex = 12;
             // 
             // ExitButton
@@ -117,6 +121,7 @@
             this.Controls.Add(this.AllRadio);
             this.Name = "Calendar";
             this.Text = "Calendar";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Calendar_FormClosed);
             this.Load += new System.EventHandler(this.Calendar_Load);
             ((System.ComponentModel.ISupportInitialize)(this.CalendarGrid)).EndInit();
             this.ResumeLayout(false);

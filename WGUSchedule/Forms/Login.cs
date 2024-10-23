@@ -43,6 +43,7 @@ namespace WGUSchedule.Forms
             {
 
                 _loginPresenter.login(userName, password);
+              
             }
             catch
             {

@@ -182,7 +182,8 @@ namespace WGUSchedule.Forms
                 }
             }
             DateTime startTimeUTC = getDateFromForm();
-            DateTime endTimeUTC = new DateTime(startTimeUTC.Year, startTimeUTC.Month, startTimeUTC.Day, startTimeUTC.Hour + 1, startTimeUTC.Minute, startTimeUTC.Second);
+            //DateTime endTimeUTC = new DateTime(startTimeUTC.Year, startTimeUTC.Month, startTimeUTC.Day, startTimeUTC.Hour + 1, startTimeUTC.Minute, startTimeUTC.Second);
+            DateTime endTimeUTC = startTimeUTC.AddHours(1);
             bool validTime = withinESTLimits(startTimeUTC);
             if (validTime == false) 
             {

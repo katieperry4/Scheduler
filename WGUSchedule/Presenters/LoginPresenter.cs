@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using WGUSchedule.Forms;
 using WGUSchedule.Models;
 
@@ -55,7 +56,8 @@ namespace WGUSchedule.Presenters
                 }
                 if (users.Count == 1)
                 {
-                    //MessageBox.Show("Valid user");
+                    int userId = users[0].userId;
+                    checkAppointments(userId);
                     Program.showMenu(users[0].userId, _culture, _connectionString);
                     _loginForm.Hide();
                 }
@@ -70,6 +72,31 @@ namespace WGUSchedule.Presenters
                         MessageBox.Show("Invalid username or password");
                     }
                 }
+            }
+        }
+
+        private void checkAppointments(int userId)
+        {
+            using (MySqlConnection connection = new MySqlConnection(_connectionString))
+            {
+                string query = @"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND start <= UTC_TIMESTAMP() + INTERVAL 15 MINUTE 
+AND start >= UTC_TIMESTAMP()";
+                connection.Open();
+                using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                {
+                    cmd.Parameters.AddWithValue("userId", userId);
+                    
+                    object result = cmd.ExecuteScalar();
+
+                    int appointmentCount = result != null ? Convert.ToInt32(result) : 0;
+                    if (appointmentCount > 0)
+                    {
+                        MessageBox.Show("You have an appointment within the next 15 minutes");
+                        return;
+                    }
+                    return;
+                }
+
             }
         }
 
