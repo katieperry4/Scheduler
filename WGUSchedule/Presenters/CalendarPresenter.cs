@@ -61,8 +61,5 @@ namespace WGUSchedule.Presenters
             }
         }
 
-        //method to return appointments between two dates -> able to handle week or month
-        //month is easy bc we can just search for ex october 2024
-        //week might take some math
     }
 }

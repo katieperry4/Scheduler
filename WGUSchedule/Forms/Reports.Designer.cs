@@ -38,13 +38,13 @@
             this.MonthLabel = new System.Windows.Forms.Label();
             this.TotalLabel = new System.Windows.Forms.Label();
             this.TotalEditHere = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.AppointmentGrid = new System.Windows.Forms.DataGridView();
             this.UserDropdown = new System.Windows.Forms.ComboBox();
             this.UserLabel = new System.Windows.Forms.Label();
-            this.DatePicker = new System.Windows.Forms.MonthCalendar();
             this.ExitButton = new System.Windows.Forms.Button();
             this.DayLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.DatePicker = new System.Windows.Forms.DateTimePicker();
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentGrid)).BeginInit();
             this.SuspendLayout();
             // 
             // ReportsHeader
@@ -66,6 +66,7 @@
             this.DayRadio.TabStop = true;
             this.DayRadio.Text = "By Day";
             this.DayRadio.UseVisualStyleBackColor = true;
+            this.DayRadio.CheckedChanged += new System.EventHandler(this.DayRadio_CheckedChanged);
             // 
             // UserRadio
             // 
@@ -77,6 +78,7 @@
             this.UserRadio.TabStop = true;
             this.UserRadio.Text = "By User";
             this.UserRadio.UseVisualStyleBackColor = true;
+            this.UserRadio.CheckedChanged += new System.EventHandler(this.UserRadio_CheckedChanged);
             // 
             // TypeRadio
             // 
@@ -88,6 +90,7 @@
             this.TypeRadio.TabStop = true;
             this.TypeRadio.Text = "By Type and Month";
             this.TypeRadio.UseVisualStyleBackColor = true;
+            this.TypeRadio.CheckedChanged += new System.EventHandler(this.TypeRadio_CheckedChanged);
             // 
             // TypeDropdown
             // 
@@ -96,6 +99,7 @@
             this.TypeDropdown.Name = "TypeDropdown";
             this.TypeDropdown.Size = new System.Drawing.Size(212, 28);
             this.TypeDropdown.TabIndex = 17;
+            this.TypeDropdown.SelectionChangeCommitted += new System.EventHandler(this.TypeDropdown_SelectionChangeCommitted);
             // 
             // TypeLabel
             // 
@@ -113,6 +117,7 @@
             this.MonthDropdown.Name = "MonthDropdown";
             this.MonthDropdown.Size = new System.Drawing.Size(212, 28);
             this.MonthDropdown.TabIndex = 19;
+            this.MonthDropdown.SelectionChangeCommitted += new System.EventHandler(this.MonthDropdown_SelectionChangeCommitted);
             // 
             // MonthLabel
             // 
@@ -137,22 +142,24 @@
             this.TotalEditHere.AutoSize = true;
             this.TotalEditHere.Location = new System.Drawing.Point(546, 164);
             this.TotalEditHere.Name = "TotalEditHere";
-            this.TotalEditHere.Size = new System.Drawing.Size(104, 20);
+            this.TotalEditHere.Size = new System.Drawing.Size(14, 20);
             this.TotalEditHere.TabIndex = 21;
-            this.TotalEditHere.Text = "Number Here";
+            this.TotalEditHere.Text = "-";
             // 
-            // dataGridView1
+            // AppointmentGrid
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(213, 198);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(669, 150);
-            this.dataGridView1.TabIndex = 22;
+            this.AppointmentGrid.AllowUserToAddRows = false;
+            this.AppointmentGrid.AllowUserToDeleteRows = false;
+            this.AppointmentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.AppointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.AppointmentGrid.Location = new System.Drawing.Point(110, 198);
+            this.AppointmentGrid.Name = "AppointmentGrid";
+            this.AppointmentGrid.ReadOnly = true;
+            this.AppointmentGrid.RowHeadersWidth = 62;
+            this.AppointmentGrid.RowTemplate.Height = 28;
+            this.AppointmentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.AppointmentGrid.Size = new System.Drawing.Size(899, 150);
+            this.AppointmentGrid.TabIndex = 22;
             // 
             // UserDropdown
             // 
@@ -161,6 +168,7 @@
             this.UserDropdown.Name = "UserDropdown";
             this.UserDropdown.Size = new System.Drawing.Size(212, 28);
             this.UserDropdown.TabIndex = 24;
+            this.UserDropdown.SelectionChangeCommitted += new System.EventHandler(this.UserDropdown_SelectionChangeCommitted);
             // 
             // UserLabel
             // 
@@ -171,13 +179,6 @@
             this.UserLabel.TabIndex = 23;
             this.UserLabel.Text = "User:";
             // 
-            // DatePicker
-            // 
-            this.DatePicker.Location = new System.Drawing.Point(295, 107);
-            this.DatePicker.MaxSelectionCount = 1;
-            this.DatePicker.Name = "DatePicker";
-            this.DatePicker.TabIndex = 25;
-            // 
             // ExitButton
             // 
             this.ExitButton.Location = new System.Drawing.Point(495, 379);
@@ -186,15 +187,26 @@
             this.ExitButton.TabIndex = 26;
             this.ExitButton.Text = "Exit";
             this.ExitButton.UseVisualStyleBackColor = true;
+            this.ExitButton.Click += new System.EventHandler(this.ExitButton_Click);
             // 
             // DayLabel
             // 
             this.DayLabel.AutoSize = true;
-            this.DayLabel.Location = new System.Drawing.Point(198, 110);
+            this.DayLabel.Location = new System.Drawing.Point(371, 223);
             this.DayLabel.Name = "DayLabel";
             this.DayLabel.Size = new System.Drawing.Size(41, 20);
             this.DayLabel.TabIndex = 27;
             this.DayLabel.Text = "Day:";
+            // 
+            // DatePicker
+            // 
+            this.DatePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.DatePicker.Location = new System.Drawing.Point(507, 217);
+            this.DatePicker.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.DatePicker.Name = "DatePicker";
+            this.DatePicker.Size = new System.Drawing.Size(160, 26);
+            this.DatePicker.TabIndex = 28;
+            this.DatePicker.ValueChanged += new System.EventHandler(this.DatePicker_ValueChanged);
             // 
             // Reports
             // 
@@ -202,24 +214,26 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 450);
             this.Controls.Add(this.ExitButton);
-            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.TotalEditHere);
             this.Controls.Add(this.TotalLabel);
             this.Controls.Add(this.MonthDropdown);
             this.Controls.Add(this.MonthLabel);
-            this.Controls.Add(this.TypeDropdown);
-            this.Controls.Add(this.TypeLabel);
             this.Controls.Add(this.ReportsHeader);
             this.Controls.Add(this.DayRadio);
             this.Controls.Add(this.UserRadio);
             this.Controls.Add(this.TypeRadio);
             this.Controls.Add(this.DayLabel);
             this.Controls.Add(this.UserLabel);
-            this.Controls.Add(this.UserDropdown);
             this.Controls.Add(this.DatePicker);
+            this.Controls.Add(this.TypeDropdown);
+            this.Controls.Add(this.TypeLabel);
+            this.Controls.Add(this.UserDropdown);
+            this.Controls.Add(this.AppointmentGrid);
             this.Name = "Reports";
             this.Text = "Reports";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Reports_FormClosing);
+            this.Load += new System.EventHandler(this.Reports_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.AppointmentGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -237,11 +251,11 @@
         private System.Windows.Forms.Label MonthLabel;
         private System.Windows.Forms.Label TotalLabel;
         private System.Windows.Forms.Label TotalEditHere;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView AppointmentGrid;
         private System.Windows.Forms.ComboBox UserDropdown;
         private System.Windows.Forms.Label UserLabel;
-        private System.Windows.Forms.MonthCalendar DatePicker;
         private System.Windows.Forms.Button ExitButton;
         private System.Windows.Forms.Label DayLabel;
+        private System.Windows.Forms.DateTimePicker DatePicker;
     }
 }

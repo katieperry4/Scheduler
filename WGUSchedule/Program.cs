@@ -60,5 +60,12 @@ namespace WGUSchedule
             CalendarPresenter calendarPresenter = new CalendarPresenter(calendarForm, connectionString, currentCulture, userId);
             calendarForm.Show();
         }
+
+        public static void showReports(int userId, CultureInfo currentCulture, string connectionString)
+        {
+            Forms.Reports reportsForm = new Forms.Reports();
+            ReportsPresenter reportsPresenter = new ReportsPresenter(reportsForm, connectionString, currentCulture, userId);
+            reportsForm.Show();
+        }
     }
 }

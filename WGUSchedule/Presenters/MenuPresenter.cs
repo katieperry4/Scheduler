@@ -52,7 +52,8 @@ namespace WGUSchedule.Presenters
             }
             else
             {
-                //reports
+                Program.showReports(_userId, _culture, _connectionString);
+                _menuForm.Hide();
 
             }
         }

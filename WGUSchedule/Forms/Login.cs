@@ -42,8 +42,8 @@ namespace WGUSchedule.Forms
             try
             {
 
-                _loginPresenter.login(userName, password);
-                _loginPresenter.logLogin(userName, password);
+                bool validlogin = _loginPresenter.login(userName, password);
+                _loginPresenter.logLogin(userName, validlogin);
             }
             catch
             {
