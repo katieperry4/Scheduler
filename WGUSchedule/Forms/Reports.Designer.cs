@@ -152,13 +152,13 @@
             this.AppointmentGrid.AllowUserToDeleteRows = false;
             this.AppointmentGrid.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.AppointmentGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.AppointmentGrid.Location = new System.Drawing.Point(110, 198);
+            this.AppointmentGrid.Location = new System.Drawing.Point(110, 155);
             this.AppointmentGrid.Name = "AppointmentGrid";
             this.AppointmentGrid.ReadOnly = true;
             this.AppointmentGrid.RowHeadersWidth = 62;
             this.AppointmentGrid.RowTemplate.Height = 28;
             this.AppointmentGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.AppointmentGrid.Size = new System.Drawing.Size(899, 150);
+            this.AppointmentGrid.Size = new System.Drawing.Size(899, 193);
             this.AppointmentGrid.TabIndex = 22;
             // 
             // UserDropdown
@@ -229,7 +229,7 @@
             this.Controls.Add(this.TypeLabel);
             this.Controls.Add(this.UserDropdown);
             this.Controls.Add(this.AppointmentGrid);
-            this.MinimumSize = new System.Drawing.Size(1000, 0);
+            this.MinimumSize = new System.Drawing.Size(1000, 56);
             this.Name = "Reports";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Reports";

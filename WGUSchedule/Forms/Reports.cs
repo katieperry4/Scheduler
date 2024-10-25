@@ -115,7 +115,14 @@ namespace WGUSchedule.Forms
                 HeaderText = "Start Time",
                 Name = "Start"
             });
+            AppointmentGrid.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "end",
+                HeaderText = "End Time",
+                Name = "End"
+            });
             AppointmentGrid.Columns["Start"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
+            AppointmentGrid.Columns["End"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
             AppointmentGrid.ClearSelection();
         }
         private void Reports_FormClosing(object sender, FormClosingEventArgs e)

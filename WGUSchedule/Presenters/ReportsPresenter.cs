@@ -88,6 +88,7 @@ namespace WGUSchedule.Presenters
             {
                 string query = @"SELECT appointment.appointmentId,
                                     appointment.start,
+                                    appointment.end,
                                     appointment.type,
                                     customer.customerName 
                                 FROM appointment 
@@ -106,6 +107,7 @@ namespace WGUSchedule.Presenters
                         {
                             type = reader.GetString("type"),
                             start = (DateTime)reader.GetDateTime("start").ToLocalTime(),
+                            end = (DateTime)reader.GetDateTime("end").ToLocalTime(),
                             appointmentId = reader.GetInt32("appointmentId"),
                             customerName = reader.GetString("customerName")
                         });

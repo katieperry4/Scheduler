@@ -108,20 +108,23 @@ namespace WGUSchedule.Presenters
 
             return appointment;
         }
-        public bool checkConfliction(DateTime startTimeUTC, DateTime endTimeUTC, int customerId, int userId)
+        public bool checkConfliction(DateTime startTimeUTC, DateTime endTimeUTC, int customerId, int userId, int appointmentId)
         {
             List<Models.Appointment> customerAppointments = getAppointmentsByCustomerAndUser(customerId, userId);
             //checking customer appointments
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-
-                string query = @"SELECT COUNT(*) FROM appointment WHERE customerId = @customerId AND(
-                                (@startTime < end AND @endTime > start) OR
-                                (@endTime > start AND @startTime < end))";
+                string query = @"SELECT COUNT(*) FROM appointment 
+                                WHERE customerId = @customerId 
+                                AND appointmentId != @appointmentId
+                                AND(
+                                    (@startTime < end AND @endTime > start) OR
+                                    (@endTime > start AND @startTime < end))";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("customerId", customerId);
+                    cmd.Parameters.AddWithValue("appointmentId", appointmentId);
                     cmd.Parameters.AddWithValue("startTime", startTimeUTC);
                     cmd.Parameters.AddWithValue("endTime", endTimeUTC);
                     object result = cmd.ExecuteScalar();
@@ -141,13 +144,16 @@ namespace WGUSchedule.Presenters
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
                
-                string query = @"SELECT COUNT(*) FROM appointment WHERE userId = @userId AND(
-                                (@startTime < end AND @endTime > start) OR
-                                (@endTime > start AND @startTime < end))";
+                string query = @"SELECT COUNT(*) FROM appointment WHERE userId = @userId 
+                                AND appointmentId != @appointmentId
+                                AND(
+                                     (@startTime < end AND @endTime > start) OR
+                                     (@endTime > start AND @startTime < end))";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
                     cmd.Parameters.AddWithValue("userId", userId);
+                    cmd.Parameters.AddWithValue("appointmentId", appointmentId);
                     cmd.Parameters.AddWithValue("startTime", startTimeUTC);
                     cmd.Parameters.AddWithValue("endTime", endTimeUTC);
                     object result = cmd.ExecuteScalar();
@@ -265,7 +271,7 @@ namespace WGUSchedule.Presenters
             Models.Appointment oldAppointment = getAppointmentByAppointmentId(appointmentId);
             if (oldAppointment.start != startTimeUTC)
             {
-                bool confliction = checkConfliction(startTimeUTC, endTimeUTC, customerId, userId);
+                bool confliction = checkConfliction(startTimeUTC, endTimeUTC, customerId, userId, appointmentId);
                 if (confliction)
                 {
                     return;

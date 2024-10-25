@@ -221,7 +221,8 @@ namespace WGUSchedule.Forms
             }
             if (AddRadio.Checked)
             {
-                bool conflictingAppointments = _appointmentPresenter.checkConfliction(startTimeUTC, endTimeUTC, customerId, userId);
+                appointmentId = 0;
+                bool conflictingAppointments = _appointmentPresenter.checkConfliction(startTimeUTC, endTimeUTC, customerId, userId, appointmentId);
                 
                 if (appointmentType == "" || appointmentType == null)
                 {
