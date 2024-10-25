@@ -90,7 +90,7 @@ namespace WGUSchedule.Presenters
             Models.Appointment appointment = new Models.Appointment();
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                string query = @"SELECT appointmentId, customerId, userId, type, start FROM appointment WHERE appointmentId = @appointmentId";
+                string query = @"SELECT appointmentId, customerId, userId, type, start, end FROM appointment WHERE appointmentId = @appointmentId";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -100,6 +100,8 @@ namespace WGUSchedule.Presenters
                     {
                         appointment.type = reader.GetString("type");
                         appointment.start = reader.GetDateTime("start"); //in UTC
+                        appointment.end = reader.GetDateTime("end"); //in UTC
+                        appointment.appointmentId = reader.GetInt32("appointmentId");
 
                     }
                 }
@@ -175,7 +177,7 @@ namespace WGUSchedule.Presenters
             List<Models.Appointment> appointmentList = new List<Models.Appointment>();
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                string query = @"SELECT start, end FROM appointment WHERE userId = @userId";
+                string query = @"SELECT start, end, appointmentId FROM appointment WHERE userId = @userId";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -187,6 +189,7 @@ namespace WGUSchedule.Presenters
                         {
                             start = (DateTime)reader.GetDateTime("start"),
                             end = (DateTime)reader.GetDateTime("end"),
+                            appointmentId = reader.GetInt32("appointmentId")
                         });
                     }
                 }
@@ -200,7 +203,7 @@ namespace WGUSchedule.Presenters
             List<Models.Appointment> appointmentList = new List<Models.Appointment>();
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                string query = @"SELECT start, end FROM appointment WHERE customerId = @customerId AND userId = @userId";
+                string query = @"SELECT start, end, appointmentId FROM appointment WHERE customerId = @customerId AND userId = @userId";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -213,6 +216,7 @@ namespace WGUSchedule.Presenters
                         {
                             start = (DateTime)reader.GetDateTime("start"),
                             end = (DateTime)reader.GetDateTime("end"),
+                            appointmentId = reader.GetInt32("appointmentId")
                         });
                     }
                 }
@@ -269,7 +273,7 @@ namespace WGUSchedule.Presenters
         public void editAppointment(int appointmentId, DateTime startTimeUTC, DateTime endTimeUTC, string appointmentType, int customerId, int userId)
         {
             Models.Appointment oldAppointment = getAppointmentByAppointmentId(appointmentId);
-            if (oldAppointment.start != startTimeUTC)
+            if (oldAppointment.start != startTimeUTC || oldAppointment.end != endTimeUTC)
             {
                 bool confliction = checkConfliction(startTimeUTC, endTimeUTC, customerId, userId, appointmentId);
                 if (confliction)

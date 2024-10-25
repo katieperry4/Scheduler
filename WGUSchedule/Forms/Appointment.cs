@@ -221,8 +221,7 @@ namespace WGUSchedule.Forms
             }
             if (AddRadio.Checked)
             {
-                appointmentId = 0;
-                bool conflictingAppointments = _appointmentPresenter.checkConfliction(startTimeUTC, endTimeUTC, customerId, userId, appointmentId);
+                bool conflictingAppointments = _appointmentPresenter.checkConfliction(startTimeUTC, endTimeUTC, customerId, userId, 0);
                 
                 if (appointmentType == "" || appointmentType == null)
                 {
@@ -308,6 +307,7 @@ namespace WGUSchedule.Forms
             Models.Appointment selectedAppointment = _appointments.FirstOrDefault(a => a.appointmentId == appointmentId);
             TypeDropdown.Text = selectedAppointment.type;
             DatePicker.Value = selectedAppointment.start;
+            TimePicker.Value = selectedAppointment.start;
             int duration = (int)(selectedAppointment.end - selectedAppointment.start).TotalMinutes;
             DurationDropdown.Text = duration.ToString();
         }
