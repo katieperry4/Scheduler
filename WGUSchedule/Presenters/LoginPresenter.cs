@@ -109,7 +109,15 @@ namespace WGUSchedule.Presenters
 
         public string getCulture()
         {
+            
             return _culture.TwoLetterISOLanguageName;
+        }
+
+        public string getLocation()
+        {
+            RegionInfo regionInfo = new RegionInfo(CultureInfo.CurrentCulture.Name);
+            string country = regionInfo.EnglishName;
+            return country;
         }
 
         internal async void logLogin(string userName, bool validity)

@@ -27,6 +27,8 @@ namespace WGUSchedule.Forms
         private void Login_Load(object sender, EventArgs e)
         {
             string lg = _loginPresenter.getCulture();
+            string location = _loginPresenter.getLocation();
+            LocationEdit.Text = location;
             if (lg == "fr")
             {
                 UsernameLabel.Text = "Nom d'utilisateur";
@@ -51,5 +53,7 @@ namespace WGUSchedule.Forms
             }
 
         }
+
+       
     }
 }

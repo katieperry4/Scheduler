@@ -34,6 +34,8 @@
             this.PasswordLabel = new System.Windows.Forms.Label();
             this.PasswordBox = new System.Windows.Forms.TextBox();
             this.LoginButton = new System.Windows.Forms.Button();
+            this.LocationLabel = new System.Windows.Forms.Label();
+            this.LocationEdit = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LoginHeader
@@ -87,18 +89,38 @@
             this.LoginButton.UseVisualStyleBackColor = true;
             this.LoginButton.Click += new System.EventHandler(this.LoginButton_Click);
             // 
+            // LocationLabel
+            // 
+            this.LocationLabel.AutoSize = true;
+            this.LocationLabel.Location = new System.Drawing.Point(51, 402);
+            this.LocationLabel.Name = "LocationLabel";
+            this.LocationLabel.Size = new System.Drawing.Size(74, 20);
+            this.LocationLabel.TabIndex = 6;
+            this.LocationLabel.Text = "Location:";
+            // 
+            // LocationEdit
+            // 
+            this.LocationEdit.AutoSize = true;
+            this.LocationEdit.Location = new System.Drawing.Point(131, 402);
+            this.LocationEdit.Name = "LocationEdit";
+            this.LocationEdit.Size = new System.Drawing.Size(14, 20);
+            this.LocationEdit.TabIndex = 7;
+            this.LocationEdit.Text = "-";
+            // 
             // Login
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1178, 450);
+            this.Controls.Add(this.LocationEdit);
+            this.Controls.Add(this.LocationLabel);
             this.Controls.Add(this.LoginButton);
             this.Controls.Add(this.PasswordBox);
             this.Controls.Add(this.PasswordLabel);
             this.Controls.Add(this.UsernameBox);
             this.Controls.Add(this.UsernameLabel);
             this.Controls.Add(this.LoginHeader);
-            this.MinimumSize = new System.Drawing.Size(1000, 0);
+            this.MinimumSize = new System.Drawing.Size(1000, 56);
             this.Name = "Login";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Login";
@@ -116,5 +138,7 @@
         private System.Windows.Forms.Label PasswordLabel;
         private System.Windows.Forms.TextBox PasswordBox;
         private System.Windows.Forms.Button LoginButton;
+        private System.Windows.Forms.Label LocationLabel;
+        private System.Windows.Forms.Label LocationEdit;
     }
 }
