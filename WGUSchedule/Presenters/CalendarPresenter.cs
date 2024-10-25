@@ -51,6 +51,7 @@ namespace WGUSchedule.Presenters
                             userId = reader.GetInt32("userId"),
                             type = reader.GetString("type"),
                             start = (DateTime)reader.GetDateTime("start").ToLocalTime(),
+                            end = (DateTime)reader.GetDateTime("end").ToLocalTime(),
                             appointmentId = reader.GetInt32("appointmentId"),
                             customerName = reader.GetString("customerName")
                         });

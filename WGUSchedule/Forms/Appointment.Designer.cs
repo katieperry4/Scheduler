@@ -42,6 +42,8 @@
             this.SaveButton = new System.Windows.Forms.Button();
             this.DatePicker = new System.Windows.Forms.DateTimePicker();
             this.TimePicker = new System.Windows.Forms.DateTimePicker();
+            this.DurationLabel = new System.Windows.Forms.Label();
+            this.DurationDropdown = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.AppointmentGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -153,7 +155,7 @@
             // 
             // CancelButton
             // 
-            this.CancelButton.Location = new System.Drawing.Point(622, 491);
+            this.CancelButton.Location = new System.Drawing.Point(622, 521);
             this.CancelButton.Name = "CancelButton";
             this.CancelButton.Size = new System.Drawing.Size(96, 36);
             this.CancelButton.TabIndex = 21;
@@ -163,7 +165,7 @@
             // 
             // SaveButton
             // 
-            this.SaveButton.Location = new System.Drawing.Point(463, 491);
+            this.SaveButton.Location = new System.Drawing.Point(463, 521);
             this.SaveButton.Name = "SaveButton";
             this.SaveButton.Size = new System.Drawing.Size(96, 36);
             this.SaveButton.TabIndex = 20;
@@ -186,11 +188,30 @@
             this.TimePicker.Size = new System.Drawing.Size(200, 26);
             this.TimePicker.TabIndex = 23;
             // 
+            // DurationLabel
+            // 
+            this.DurationLabel.AutoSize = true;
+            this.DurationLabel.Location = new System.Drawing.Point(393, 478);
+            this.DurationLabel.Name = "DurationLabel";
+            this.DurationLabel.Size = new System.Drawing.Size(144, 20);
+            this.DurationLabel.TabIndex = 24;
+            this.DurationLabel.Text = "Duration: (minutes)";
+            // 
+            // DurationDropdown
+            // 
+            this.DurationDropdown.FormattingEnabled = true;
+            this.DurationDropdown.Location = new System.Drawing.Point(549, 475);
+            this.DurationDropdown.Name = "DurationDropdown";
+            this.DurationDropdown.Size = new System.Drawing.Size(169, 28);
+            this.DurationDropdown.TabIndex = 25;
+            // 
             // Appointment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1178, 547);
+            this.ClientSize = new System.Drawing.Size(1178, 589);
+            this.Controls.Add(this.DurationDropdown);
+            this.Controls.Add(this.DurationLabel);
             this.Controls.Add(this.TimePicker);
             this.Controls.Add(this.DatePicker);
             this.Controls.Add(this.CancelButton);
@@ -205,7 +226,7 @@
             this.Controls.Add(this.DeleteRadio);
             this.Controls.Add(this.EditRadio);
             this.Controls.Add(this.AddRadio);
-            this.MinimumSize = new System.Drawing.Size(1000, 0);
+            this.MinimumSize = new System.Drawing.Size(1000, 56);
             this.Name = "Appointment";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Appointment";
@@ -233,5 +254,7 @@
         private System.Windows.Forms.Button SaveButton;
         private System.Windows.Forms.DateTimePicker DatePicker;
         private System.Windows.Forms.DateTimePicker TimePicker;
+        private System.Windows.Forms.Label DurationLabel;
+        private System.Windows.Forms.ComboBox DurationDropdown;
     }
 }

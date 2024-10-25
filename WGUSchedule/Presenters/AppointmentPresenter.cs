@@ -61,7 +61,7 @@ namespace WGUSchedule.Presenters
             List<Models.Appointment> appointmentList = new List<Models.Appointment>();
             using (MySqlConnection connection = new MySqlConnection(_connectionString))
             {
-                string query = @"SELECT appointmentId, customerId, userId, type, start FROM appointment WHERE customerId = @customerId";
+                string query = @"SELECT appointmentId, customerId, userId, type, start, end FROM appointment WHERE customerId = @customerId";
                 connection.Open();
                 using (MySqlCommand cmd = new MySqlCommand(query, connection))
                 {
@@ -75,6 +75,7 @@ namespace WGUSchedule.Presenters
                             userId = reader.GetInt32("userId"),
                             type = reader.GetString("type"),
                             start = (DateTime)reader.GetDateTime("start").ToLocalTime(),
+                            end = (DateTime)reader.GetDateTime("end").ToLocalTime(),
                             appointmentId = reader.GetInt32("appointmentId")
                         });
                     }

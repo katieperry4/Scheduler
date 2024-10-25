@@ -27,6 +27,7 @@ namespace WGUSchedule.Forms
         {
             populateTypeDropdown();
             populateCustomerDropdown();
+            populateDurationDropdown();
             setDatePickerFormat();
         }
 
@@ -39,6 +40,23 @@ namespace WGUSchedule.Forms
             "Training",
             "Design Review"
         };
+
+        List<int> _duration = new List<int>()
+        {
+            15,
+            30,
+            45,
+            60
+        };
+
+        public void populateDurationDropdown()
+        {
+            DurationDropdown.Items.Clear();
+            foreach (var item in _duration) 
+            {
+                DurationDropdown.Items.Add(item);
+            }
+        }
 
         public void populateTypeDropdown()
         {
@@ -85,7 +103,14 @@ namespace WGUSchedule.Forms
                 HeaderText = "Start Time",
                 Name = "Start"
             });
+            AppointmentGrid.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "end",
+                HeaderText = "End Time",
+                Name = "End"
+            });
             AppointmentGrid.Columns["Start"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
+            AppointmentGrid.Columns["End"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
             List <Models.Appointment> appointmentList = _appointmentPresenter.getAppointmentByCustomerId(customerId);
             _appointments = appointmentList;
             AppointmentGrid.DataSource = _appointments;
@@ -146,6 +171,7 @@ namespace WGUSchedule.Forms
         public void cleanupBoxes()
         {
             TypeDropdown.SelectedIndex = -1;
+            DurationDropdown.SelectedIndex = -1;
         }
 
         private void CustomerDropdown_SelectionChangeCommitted(object sender, EventArgs e)
@@ -186,7 +212,8 @@ namespace WGUSchedule.Forms
                 }
             }
             DateTime startTimeUTC = getDateFromForm();
-            DateTime endTimeUTC = startTimeUTC.AddHours(1);
+            int endTimeDropdown = (int)DurationDropdown.SelectedItem;
+            DateTime endTimeUTC = startTimeUTC.AddMinutes(endTimeDropdown);
             bool validTime = withinESTLimits(startTimeUTC);
             if (validTime == false) 
             {
@@ -237,7 +264,7 @@ namespace WGUSchedule.Forms
 
         private bool checkBoxes()
         {
-            if (CustomerDropdown.SelectedItem != null && TypeDropdown.SelectedItem != null)
+            if (CustomerDropdown.SelectedItem != null && TypeDropdown.SelectedItem != null && DurationDropdown.SelectedItem != null)
             {
                 return true;
             }
@@ -280,7 +307,8 @@ namespace WGUSchedule.Forms
             Models.Appointment selectedAppointment = _appointments.FirstOrDefault(a => a.appointmentId == appointmentId);
             TypeDropdown.Text = selectedAppointment.type;
             DatePicker.Value = selectedAppointment.start;
-            TimePicker.Value = selectedAppointment.start;
+            int duration = (int)(selectedAppointment.end - selectedAppointment.start).TotalMinutes;
+            DurationDropdown.Text = duration.ToString();
         }
 
 

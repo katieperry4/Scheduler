@@ -51,8 +51,15 @@ namespace WGUSchedule.Forms
                 HeaderText = "Start Time",
                 Name = "Start"
             });
+            CalendarGrid.Columns.Add(new DataGridViewTextBoxColumn()
+            {
+                DataPropertyName = "end",
+                HeaderText = "End Time",
+                Name = "End"
+            });
             
             CalendarGrid.Columns["Start"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
+            CalendarGrid.Columns["End"].DefaultCellStyle.Format = "MM/dd/yyyy hh:mm:ss";
         }
 
         private void Calendar_Load(object sender, EventArgs e)
